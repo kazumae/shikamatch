@@ -1,7 +1,20 @@
 <?php
 
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// トップページ（メンバー一覧へリダイレクト）
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/members');
 });
+
+// メンバー一覧・検索
+Route::get('/members', [MemberController::class, 'index'])->name('members.index');
+
+// メンバー詳細
+Route::get('/members/{id}', [MemberController::class, 'show'])->name('members.show');
+
+// プロフィール編集
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
