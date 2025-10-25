@@ -73,7 +73,7 @@
         </header>
 
         <!-- メンバー詳細 -->
-        <main class="flex-1 overflow-y-auto pb-20 lg:pb-0">
+        <main class="flex-1 overflow-y-auto">
           <div class="lg:max-w-4xl lg:mx-auto lg:py-8">
             <div class="bg-white lg:rounded-lg lg:shadow-sm">
               <!-- プロフィール基本情報 -->
@@ -88,7 +88,7 @@
                   </div>
                 </div>
 
-                <!-- 名前とレベル -->
+                <!-- 名前とグループ -->
                 <div class="text-center mb-2 lg:mb-4">
                   <div class="flex items-center justify-center gap-2 lg:gap-3">
                     <h2 class="text-xl lg:text-2xl font-bold text-gray-900">{{ member.name }}</h2>
@@ -205,34 +205,10 @@
                 <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">こんな人とバンド組みたい</h3>
                 <p class="text-sm lg:text-base text-gray-600 whitespace-pre-wrap">{{ getBandPreference() }}</p>
               </div>
-
-              <!-- デスクトップ用ボタン -->
-              <div class="hidden lg:block px-8 py-6 border-t border-gray-200">
-                <button
-                  @click="sendMessage"
-                  class="w-full py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
-                  :disabled="true"
-                  :title="'メッセージ機能は今後実装予定です'"
-                >
-                  メッセージを送る
-                </button>
-              </div>
             </div>
           </div>
         </main>
       </div>
-    </div>
-
-    <!-- 下部固定ボタン (mobile only) -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 lg:hidden">
-      <button
-        @click="sendMessage"
-        class="w-full py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
-        :disabled="true"
-        :title="'メッセージ機能は今後実装予定です'"
-      >
-        メッセージを送る
-      </button>
     </div>
   </div>
 </template>
@@ -323,10 +299,5 @@ const getBandPreference = () => {
   }
   // モックデータ
   return '音楽を楽しめる人と一緒にバンドを組みたいです！初心者の方も大歓迎です。週末に練習できる方だと嬉しいです。'
-}
-
-const sendMessage = () => {
-  // メッセージ送信機能は今後実装
-  console.log('メッセージ送信機能は今後実装予定です')
 }
 </script>

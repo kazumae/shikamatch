@@ -101,7 +101,7 @@
 
                 <!-- メンバー情報 -->
                 <div class="flex-1 min-w-0 lg:text-center">
-                  <!-- 名前とレベルバッジ -->
+                  <!-- 名前とグループバッジ -->
                   <div class="flex items-start justify-between mb-1 lg:flex-col lg:items-center lg:gap-2">
                     <h3 class="font-semibold text-gray-900 lg:text-lg">{{ member.name }}</h3>
                     <span
@@ -207,9 +207,9 @@
             />
           </div>
 
-          <!-- グループ（レベル） -->
+          <!-- グループ -->
           <div class="mb-6">
-            <label class="block text-sm font-medium text-gray-700 mb-2">グループ（レベル）</label>
+            <label class="block text-sm font-medium text-gray-700 mb-2">グループ</label>
             <div class="flex gap-2">
               <button
                 @click="selectedLevel = ''"
