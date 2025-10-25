@@ -34,10 +34,10 @@
           />
         </div>
 
-        <!-- レベル選択 -->
+        <!-- グループ選択 -->
         <div class="mb-6">
           <label class="block text-sm font-medium text-gray-700 mb-2">
-            レベル
+            グループ
           </label>
           <div class="flex gap-2">
             <button

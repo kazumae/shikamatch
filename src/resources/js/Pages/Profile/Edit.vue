@@ -110,9 +110,9 @@
                 />
               </div>
 
-              <!-- レベル -->
+              <!-- グループ -->
               <div class="bg-white px-4 py-4 lg:px-8 lg:py-6 border-b border-gray-200 lg:shadow-sm">
-                <label class="block text-sm lg:text-base font-medium text-gray-700 mb-2 lg:mb-3">レベル</label>
+                <label class="block text-sm lg:text-base font-medium text-gray-700 mb-2 lg:mb-3">グループ</label>
                 <div class="flex gap-2 lg:gap-3">
                   <button
                     v-for="level in levels"

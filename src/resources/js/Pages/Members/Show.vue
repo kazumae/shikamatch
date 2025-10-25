@@ -88,7 +88,7 @@
                   </div>
                 </div>
 
-                <!-- 名前とレベル -->
+                <!-- 名前とグループ -->
                 <div class="text-center mb-2 lg:mb-4">
                   <div class="flex items-center justify-center gap-2 lg:gap-3">
                     <h2 class="text-xl lg:text-2xl font-bold text-gray-900">{{ member.name }}</h2>
