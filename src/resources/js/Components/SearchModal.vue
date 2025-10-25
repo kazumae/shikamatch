@@ -39,14 +39,14 @@
           <label class="block text-sm font-medium text-gray-700 mb-2">
             グループ
           </label>
-          <div class="flex gap-2">
+          <div class="flex flex-wrap gap-2">
             <button
               v-for="level in filterOptions.levels"
               :key="level.value"
               type="button"
               @click="toggleLevel(level.value)"
               :class="[
-                'px-4 py-2 rounded-md transition',
+                'px-3 py-1.5 rounded-md transition',
                 searchForm.level === level.value
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'

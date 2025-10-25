@@ -113,15 +113,16 @@
               <!-- グループ -->
               <div class="bg-white px-4 py-4 lg:px-8 lg:py-6 border-b border-gray-200 lg:shadow-sm">
                 <label class="block text-sm lg:text-base font-medium text-gray-700 mb-2 lg:mb-3">グループ</label>
-                <div class="flex gap-2 lg:gap-3">
+                <div class="flex flex-wrap gap-2 lg:gap-3">
                   <button
                     v-for="level in levels"
                     :key="level.value"
                     @click.prevent="form.level = level.value"
                     :class="[
-                      'flex-1 py-2 lg:py-3 rounded-full text-sm lg:text-base font-medium transition',
+                      'px-5 py-2 lg:px-6 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition whitespace-nowrap',
                       form.level === level.value ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     ]"
+                    type="button"
                   >
                     {{ level.label }}
                   </button>
@@ -137,7 +138,7 @@
                     :key="part.value"
                     @click.prevent="togglePart(part.value)"
                     :class="[
-                      'px-4 py-2 lg:px-5 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition',
+                      'px-5 py-2 lg:px-6 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition whitespace-nowrap',
                       form.parts.includes(part.value) ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     ]"
                     type="button"
@@ -156,7 +157,7 @@
                     :key="genre.value"
                     @click.prevent="toggleGenre(genre.value)"
                     :class="[
-                      'px-4 py-2 lg:px-5 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition',
+                      'px-5 py-2 lg:px-6 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition whitespace-nowrap',
                       form.genres.includes(genre.value) ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     ]"
                     type="button"
