@@ -1,157 +1,230 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- モバイルヘッダー -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-10">
-      <div class="px-4 py-3 flex items-center">
-        <Link
-          href="/members"
-          class="mr-3"
-        >
-          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </Link>
-        <h1 class="text-lg font-semibold text-gray-900">プロフィール詳細</h1>
-      </div>
-    </header>
+    <!-- Desktop layout wrapper -->
+    <div class="lg:flex lg:h-screen">
+      <!-- Left Sidebar (desktop only) -->
+      <aside class="hidden lg:block lg:w-64 lg:flex-shrink-0 bg-white border-r border-gray-200">
+        <div class="h-full flex flex-col">
+          <!-- Logo -->
+          <div class="px-6 py-4 border-b border-gray-200">
+            <div class="flex items-center gap-3">
+              <img src="/img/icon.png" alt="ShikaMatch" class="w-10 h-10 object-contain" />
+              <div>
+                <h1 class="text-xl font-bold text-gray-900">ShikaMatch</h1>
+                <p class="text-xs text-gray-500">音楽仲間を見つけよう</p>
+              </div>
+            </div>
+          </div>
 
-    <!-- メンバー詳細 -->
-    <main class="pb-20">
-      <div class="bg-white">
-        <!-- プロフィール基本情報 -->
-        <div class="px-4 py-6">
-          <!-- プロフィール画像（中央配置） -->
-          <div class="flex justify-center mb-4">
-            <div class="w-32 h-32 bg-gray-200 rounded-full flex items-center justify-center">
-              <svg v-if="!member.profile_image" class="w-20 h-20 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          <!-- Navigation -->
+          <nav class="flex-1 px-4 py-4">
+            <Link
+              href="/members"
+              class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition mb-2"
+            >
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
               </svg>
-              <img v-else :src="member.profile_image" :alt="member.name" class="w-full h-full rounded-full object-cover" />
+              ホーム
+            </Link>
+            <button
+              @click="goToProfile"
+              class="w-full flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition"
+            >
+              <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              マイページ
+            </button>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main content area -->
+      <div class="flex-1 flex flex-col lg:overflow-hidden">
+        <!-- モバイルヘッダー -->
+        <header class="bg-white border-b border-gray-200 sticky top-0 z-10 lg:hidden">
+          <div class="px-4 py-3 flex items-center">
+            <Link
+              href="/members"
+              class="mr-3"
+            >
+              <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </Link>
+            <h1 class="text-lg font-semibold text-gray-900">プロフィール詳細</h1>
+          </div>
+        </header>
+
+        <!-- デスクトップヘッダー -->
+        <header class="hidden lg:block bg-white border-b border-gray-200">
+          <div class="px-6 py-4 flex items-center">
+            <Link
+              href="/members"
+              class="mr-4 text-gray-600 hover:text-gray-900"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </Link>
+            <h1 class="text-2xl font-semibold text-gray-900">プロフィール詳細</h1>
+          </div>
+        </header>
+
+        <!-- メンバー詳細 -->
+        <main class="flex-1 overflow-y-auto pb-20 lg:pb-0">
+          <div class="lg:max-w-4xl lg:mx-auto lg:py-8">
+            <div class="bg-white lg:rounded-lg lg:shadow-sm">
+              <!-- プロフィール基本情報 -->
+              <div class="px-4 py-6 lg:px-8 lg:py-8">
+                <!-- プロフィール画像（中央配置） -->
+                <div class="flex justify-center mb-4 lg:mb-6">
+                  <div class="w-32 h-32 lg:w-40 lg:h-40 bg-gray-200 rounded-full flex items-center justify-center">
+                    <svg v-if="!member.profile_image" class="w-20 h-20 lg:w-24 lg:h-24 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                    <img v-else :src="member.profile_image" :alt="member.name" class="w-full h-full rounded-full object-cover" />
+                  </div>
+                </div>
+
+                <!-- 名前とレベル -->
+                <div class="text-center mb-2 lg:mb-4">
+                  <div class="flex items-center justify-center gap-2 lg:gap-3">
+                    <h2 class="text-xl lg:text-2xl font-bold text-gray-900">{{ member.name }}</h2>
+                    <span class="px-2 py-0.5 lg:px-3 lg:py-1 text-xs lg:text-sm rounded bg-green-500 text-white font-medium">
+                      {{ member.level }}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- サブタイトル（パート｜ジャンル） -->
+                <p class="text-center text-sm lg:text-base text-gray-600">
+                  {{ member.parts && member.parts[0] ? member.parts[0] : 'ギター' }} ｜
+                  {{ member.genres && member.genres[0] ? member.genres[0] : 'ポップス' }}
+                  {{ member.parts && member.parts[1] ? ' ｜ ' + member.parts[1] : '' }}
+                </p>
+              </div>
+
+              <!-- 担当パート -->
+              <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
+                <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">担当パート</h3>
+                <div class="flex flex-wrap gap-2 lg:gap-3">
+                  <span
+                    v-for="(part, index) in member.parts"
+                    :key="part"
+                    :class="[
+                      'px-3 py-1 lg:px-4 lg:py-2 text-sm lg:text-base rounded-full',
+                      index % 2 === 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800'
+                    ]"
+                  >
+                    {{ part }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- 好きなジャンル -->
+              <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
+                <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">好きなジャンル</h3>
+                <div class="flex flex-wrap gap-2 lg:gap-3">
+                  <span
+                    v-for="genre in member.genres"
+                    :key="genre"
+                    class="px-3 py-1 lg:px-4 lg:py-2 bg-gray-100 text-gray-700 text-sm lg:text-base rounded-full"
+                  >
+                    {{ genre }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- 音楽の好み -->
+              <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
+                <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">音楽の好み</h3>
+                <div class="flex flex-wrap gap-2 lg:gap-3">
+                  <span
+                    v-for="preference in getMusicPreferences()"
+                    :key="preference.name || preference"
+                    :class="[
+                      'px-3 py-1 lg:px-4 lg:py-2 text-sm lg:text-base rounded-full border',
+                      isMatched(preference)
+                        ? 'border-red-400 text-red-600 font-bold'
+                        : 'border-gray-300 text-gray-600'
+                    ]"
+                  >
+                    {{ preference.name || preference }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- コピーしたい曲 -->
+              <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
+                <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">コピーしたい曲</h3>
+                <div class="flex flex-wrap gap-2 lg:gap-3">
+                  <span
+                    v-for="song in getSongsToCopy()"
+                    :key="song.name || song"
+                    :class="[
+                      'px-3 py-1 lg:px-4 lg:py-2 text-sm lg:text-base rounded-full border',
+                      isMatched(song)
+                        ? 'border-red-400 text-red-600 font-bold'
+                        : 'border-gray-300 text-gray-600'
+                    ]"
+                  >
+                    {{ song.name || song }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- 好きなアーティスト -->
+              <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
+                <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">好きなアーティスト</h3>
+                <div class="flex flex-wrap gap-2 lg:gap-3">
+                  <span
+                    v-for="artist in getFavoriteArtists()"
+                    :key="artist.name || artist"
+                    :class="[
+                      'px-3 py-1 lg:px-4 lg:py-2 text-sm lg:text-base rounded-full border',
+                      isMatched(artist)
+                        ? 'border-red-400 text-red-600 font-bold'
+                        : 'border-gray-300 text-gray-600'
+                    ]"
+                  >
+                    {{ artist.name || artist }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- 自己紹介 -->
+              <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
+                <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">自己紹介</h3>
+                <p class="text-sm lg:text-base text-gray-600 whitespace-pre-wrap">{{ member.self_introduction }}</p>
+              </div>
+
+              <!-- こんな人とバンド組みたい -->
+              <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
+                <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">こんな人とバンド組みたい</h3>
+                <p class="text-sm lg:text-base text-gray-600 whitespace-pre-wrap">{{ getBandPreference() }}</p>
+              </div>
+
+              <!-- デスクトップ用ボタン -->
+              <div class="hidden lg:block px-8 py-6 border-t border-gray-200">
+                <button
+                  @click="sendMessage"
+                  class="w-full py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
+                  :disabled="true"
+                  :title="'メッセージ機能は今後実装予定です'"
+                >
+                  メッセージを送る
+                </button>
+              </div>
             </div>
           </div>
-
-          <!-- 名前とレベル -->
-          <div class="text-center mb-2">
-            <div class="flex items-center justify-center gap-2">
-              <h2 class="text-xl font-bold text-gray-900">{{ member.name }}</h2>
-              <span class="px-2 py-0.5 text-xs rounded bg-green-500 text-white font-medium">
-                {{ member.level }}レベル
-              </span>
-            </div>
-          </div>
-
-          <!-- サブタイトル（パート｜ジャンル） -->
-          <p class="text-center text-sm text-gray-600">
-            {{ member.parts && member.parts[0] ? member.parts[0] : 'ギター' }} ｜
-            {{ member.genres && member.genres[0] ? member.genres[0] : 'ポップス' }}
-            {{ member.parts && member.parts[1] ? ' ｜ ' + member.parts[1] : '' }}
-          </p>
-        </div>
-
-        <!-- 担当パート -->
-        <div class="px-4 py-4 border-t border-gray-200">
-          <h3 class="text-sm font-medium text-gray-900 mb-3">担当パート</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              v-for="(part, index) in member.parts"
-              :key="part"
-              :class="[
-                'px-3 py-1 text-sm rounded-full',
-                index % 2 === 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800'
-              ]"
-            >
-              {{ part }}
-            </span>
-          </div>
-        </div>
-
-        <!-- 好きなジャンル -->
-        <div class="px-4 py-4 border-t border-gray-200">
-          <h3 class="text-sm font-medium text-gray-900 mb-3">好きなジャンル</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              v-for="genre in member.genres"
-              :key="genre"
-              class="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
-            >
-              {{ genre }}
-            </span>
-          </div>
-        </div>
-
-        <!-- 音楽の好み -->
-        <div class="px-4 py-4 border-t border-gray-200">
-          <h3 class="text-sm font-medium text-gray-900 mb-3">音楽の好み</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              v-for="preference in getMusicPreferences()"
-              :key="preference.name || preference"
-              :class="[
-                'px-3 py-1 text-sm rounded-full border',
-                isMatched(preference)
-                  ? 'border-red-400 text-red-600 font-bold'
-                  : 'border-gray-300 text-gray-600'
-              ]"
-            >
-              {{ preference.name || preference }}
-            </span>
-          </div>
-        </div>
-
-        <!-- コピーしたい曲 -->
-        <div class="px-4 py-4 border-t border-gray-200">
-          <h3 class="text-sm font-medium text-gray-900 mb-3">コピーしたい曲</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              v-for="song in getSongsToCopy()"
-              :key="song.name || song"
-              :class="[
-                'px-3 py-1 text-sm rounded-full border',
-                isMatched(song)
-                  ? 'border-red-400 text-red-600 font-bold'
-                  : 'border-gray-300 text-gray-600'
-              ]"
-            >
-              {{ song.name || song }}
-            </span>
-          </div>
-        </div>
-
-        <!-- 好きなアーティスト -->
-        <div class="px-4 py-4 border-t border-gray-200">
-          <h3 class="text-sm font-medium text-gray-900 mb-3">好きなアーティスト</h3>
-          <div class="flex flex-wrap gap-2">
-            <span
-              v-for="artist in getFavoriteArtists()"
-              :key="artist.name || artist"
-              :class="[
-                'px-3 py-1 text-sm rounded-full border',
-                isMatched(artist)
-                  ? 'border-red-400 text-red-600 font-bold'
-                  : 'border-gray-300 text-gray-600'
-              ]"
-            >
-              {{ artist.name || artist }}
-            </span>
-          </div>
-        </div>
-
-        <!-- 自己紹介 -->
-        <div class="px-4 py-4 border-t border-gray-200">
-          <h3 class="text-sm font-medium text-gray-900 mb-3">自己紹介</h3>
-          <p class="text-sm text-gray-600 whitespace-pre-wrap">{{ member.self_introduction }}</p>
-        </div>
-
-        <!-- こんな人とバンド組みたい -->
-        <div class="px-4 py-4 border-t border-gray-200">
-          <h3 class="text-sm font-medium text-gray-900 mb-3">こんな人とバンド組みたい</h3>
-          <p class="text-sm text-gray-600 whitespace-pre-wrap">{{ getBandPreference() }}</p>
-        </div>
+        </main>
       </div>
-    </main>
+    </div>
 
-    <!-- 下部固定ボタン -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3">
+    <!-- 下部固定ボタン (mobile only) -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-3 lg:hidden">
       <button
         @click="sendMessage"
         class="w-full py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition"
@@ -174,6 +247,11 @@ const props = defineProps({
     required: true,
   },
 })
+
+// Navigation
+const goToProfile = () => {
+  window.location.href = '/profile/edit'
+}
 
 // Methods for mock data
 const getMusicPreferences = () => {

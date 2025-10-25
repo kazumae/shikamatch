@@ -28,7 +28,7 @@ class ProfileController extends Controller
         // バリデーション
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'level' => 'required|in:初級,中級,上級',
+            'level' => 'required|in:kojika+,otoshika,shikamini,shikasession,sikacrowds',
             'parts' => 'array',
             'genres' => 'array',
             'music_preferences' => 'array',
@@ -54,7 +54,7 @@ class ProfileController extends Controller
         return [
             'id' => 1,
             'name' => '田中太郎',
-            'level' => '中級',
+            'level' => 'shikamini',
             'parts' => ['ギター', 'ボーカル'],
             'genres' => ['ロック', 'ポップス'],
             'music_preferences' => ['メロディアス', 'グルーヴィー'],
