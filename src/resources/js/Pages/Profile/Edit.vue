@@ -137,7 +137,7 @@
                     :key="part.value"
                     @click.prevent="togglePart(part.value)"
                     :class="[
-                      'px-4 py-2 lg:px-5 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition',
+                      'px-5 py-2 lg:px-6 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition whitespace-nowrap',
                       form.parts.includes(part.value) ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     ]"
                     type="button"
@@ -156,7 +156,7 @@
                     :key="genre.value"
                     @click.prevent="toggleGenre(genre.value)"
                     :class="[
-                      'px-4 py-2 lg:px-5 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition',
+                      'px-5 py-2 lg:px-6 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition whitespace-nowrap',
                       form.genres.includes(genre.value) ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     ]"
                     type="button"
