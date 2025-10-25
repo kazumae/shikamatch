@@ -379,7 +379,7 @@ const viewMemberDetail = (id) => {
 }
 
 const goToProfile = () => {
-  router.visit('/profile/edit')
+  router.visit('/profile')
 }
 </script>
 
