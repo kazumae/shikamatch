@@ -210,7 +210,7 @@
           <!-- グループ -->
           <div class="mb-6">
             <label class="block text-sm font-medium text-gray-700 mb-2">グループ</label>
-            <div class="flex gap-2">
+            <div class="flex flex-wrap gap-2">
               <button
                 @click="selectedLevel = ''"
                 :class="[

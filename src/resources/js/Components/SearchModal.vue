@@ -46,7 +46,7 @@
               type="button"
               @click="toggleLevel(level.value)"
               :class="[
-                'px-5 py-2 rounded-md transition whitespace-nowrap min-w-fit',
+                'px-3 py-1.5 rounded-md transition',
                 searchForm.level === level.value
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
