@@ -73,7 +73,7 @@
         </header>
 
         <!-- メンバー詳細 -->
-        <main class="flex-1 overflow-y-auto pb-20 lg:pb-0">
+        <main class="flex-1 overflow-y-auto">
           <div class="lg:max-w-4xl lg:mx-auto lg:py-8">
             <div class="bg-white lg:rounded-lg lg:shadow-sm">
               <!-- プロフィール基本情報 -->
