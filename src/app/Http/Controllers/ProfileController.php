@@ -8,6 +8,19 @@ use Inertia\Inertia;
 class ProfileController extends Controller
 {
     /**
+     * プロフィール表示画面を表示
+     */
+    public function show()
+    {
+        // 現在のユーザー情報（モックデータ）
+        $user = $this->getMockUserData();
+
+        return Inertia::render('Profile/Show', [
+            'user' => $user,
+        ]);
+    }
+
+    /**
      * プロフィール編集画面を表示
      */
     public function edit()

@@ -250,7 +250,7 @@ const props = defineProps({
 
 // Navigation
 const goToProfile = () => {
-  window.location.href = '/profile/edit'
+  window.location.href = '/profile'
 }
 
 // Methods for mock data
