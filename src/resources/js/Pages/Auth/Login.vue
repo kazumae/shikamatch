@@ -4,7 +4,7 @@
       <!-- ロゴ -->
       <div class="flex justify-center">
         <div class="flex items-center space-x-2">
-          <img src="/img/icon.png" alt="ShikaMatch" class="w-10 h-10" />
+          <img src="/img/icon.png" alt="ShikaMatch" class="h-10 w-auto" />
           <h1 class="text-3xl font-bold text-gray-900">ShikaMatch</h1>
         </div>
       </div>
