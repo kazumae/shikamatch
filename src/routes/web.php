@@ -30,3 +30,8 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')
 // プロフィール編集
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+// ヘルスチェックエンドポイント（ロードバランサー用）
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok'], 200);
+});
