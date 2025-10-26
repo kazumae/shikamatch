@@ -148,6 +148,29 @@
                 </div>
               </div>
 
+              <!-- サブパート -->
+              <div class="bg-white px-4 py-4 lg:px-8 lg:py-6 border-b border-gray-200 lg:shadow-sm">
+                <label class="block text-sm lg:text-base font-medium text-gray-700 mb-2 lg:mb-3">サブパート</label>
+                <p class="text-xs lg:text-sm text-gray-500 mb-3">メインで演奏できるパート以外のちょっとかじってるパート</p>
+                <div class="flex flex-wrap gap-2 lg:gap-3">
+                  <button
+                    v-for="part in parts"
+                    :key="part.value"
+                    @click.prevent="toggleSubPart(part.value)"
+                    :class="[
+                      'px-5 py-2 lg:px-6 lg:py-2.5 rounded-full text-sm lg:text-base font-medium transition whitespace-nowrap',
+                      form.sub_parts.includes(part.value) ? 'bg-blue-600 text-white' :
+                      form.parts.includes(part.value) ? 'bg-gray-200 text-gray-400 cursor-not-allowed' :
+                      'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    ]"
+                    :disabled="form.parts.includes(part.value)"
+                    type="button"
+                  >
+                    {{ part.label }}
+                  </button>
+                </div>
+              </div>
+
               <!-- 好きなジャンル -->
               <div class="bg-white px-4 py-4 lg:px-8 lg:py-6 border-b border-gray-200 lg:shadow-sm">
                 <label class="block text-sm lg:text-base font-medium text-gray-700 mb-2 lg:mb-3">好きなジャンル</label>
@@ -318,6 +341,7 @@ const form = reactive({
   name: props.user.name || '',
   level: props.user.level || 'otoshika',
   parts: props.user.parts || [],
+  sub_parts: props.user.sub_parts || [],
   genres: props.user.genres || [],
   music_preferences: props.user.music_preferences || [''],
   songs_to_copy: props.user.songs_to_copy || [''],
@@ -366,6 +390,23 @@ const togglePart = (part) => {
     form.parts.splice(index, 1)
   } else {
     form.parts.push(part)
+    // 担当パートに追加したらサブパートから削除
+    const subIndex = form.sub_parts.indexOf(part)
+    if (subIndex > -1) {
+      form.sub_parts.splice(subIndex, 1)
+    }
+  }
+}
+
+const toggleSubPart = (part) => {
+  const index = form.sub_parts.indexOf(part)
+  if (index > -1) {
+    form.sub_parts.splice(index, 1)
+  } else {
+    // 担当パートに含まれていない場合のみサブパートに追加
+    if (!form.parts.includes(part)) {
+      form.sub_parts.push(part)
+    }
   }
 }
 

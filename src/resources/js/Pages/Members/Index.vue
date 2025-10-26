@@ -120,13 +120,24 @@
 
                   <!-- パート -->
                   <div class="flex flex-wrap gap-1 mb-2 lg:justify-center lg:gap-2">
+                    <!-- メインパート（ベタ塗り） -->
                     <span
                       v-for="part in member.parts"
-                      :key="part"
+                      :key="`main-${part}`"
                       class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded lg:text-sm lg:px-3 lg:py-1"
                     >
                       {{ part }}
                     </span>
+                    <!-- サブパート（白抜き） -->
+                    <span
+                      v-for="part in member.sub_parts"
+                      v-if="member.sub_parts && member.sub_parts.length > 0"
+                      :key="`sub-${part}`"
+                      class="px-2 py-0.5 bg-white border border-blue-400 text-blue-700 text-xs rounded lg:text-sm lg:px-3 lg:py-1"
+                    >
+                      {{ part }}
+                    </span>
+                    <!-- ジャンル -->
                     <span
                       v-for="genre in member.genres"
                       :key="genre"

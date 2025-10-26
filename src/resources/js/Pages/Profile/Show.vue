@@ -115,12 +115,24 @@
               <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
                 <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">担当パート</h3>
                 <div class="flex flex-wrap gap-2 lg:gap-3">
+                  <!-- メインパート（ベタ塗り） -->
                   <span
                     v-for="(part, index) in user.parts"
-                    :key="part"
+                    :key="`main-${part}`"
                     :class="[
                       'px-3 py-1 lg:px-4 lg:py-2 text-sm lg:text-base rounded-full',
                       index % 2 === 0 ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800'
+                    ]"
+                  >
+                    {{ part }}
+                  </span>
+                  <!-- サブパート（白抜き） -->
+                  <span
+                    v-for="(part, index) in user.sub_parts"
+                    :key="`sub-${part}`"
+                    :class="[
+                      'px-3 py-1 lg:px-4 lg:py-2 text-sm lg:text-base rounded-full bg-white border-2',
+                      index % 2 === 0 ? 'border-yellow-400 text-yellow-800' : 'border-blue-400 text-blue-800'
                     ]"
                   >
                     {{ part }}
