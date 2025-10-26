@@ -43,7 +43,7 @@
         <header class="bg-white border-b border-gray-200 sticky top-0 z-10 lg:hidden">
           <div class="px-4 py-3 flex items-center justify-between">
             <Link
-              href="/members"
+              href="/profile"
               class="text-gray-600"
             >
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,7 +63,17 @@
         <!-- デスクトップヘッダー -->
         <header class="hidden lg:block bg-white border-b border-gray-200">
           <div class="px-6 py-4 flex items-center justify-between">
-            <h1 class="text-2xl font-semibold text-gray-900">プロフィール編集</h1>
+            <div class="flex items-center">
+              <Link
+                href="/profile"
+                class="mr-4 text-gray-600 hover:text-gray-900"
+              >
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+              </Link>
+              <h1 class="text-2xl font-semibold text-gray-900">プロフィール編集</h1>
+            </div>
             <button
               @click="saveProfile"
               class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
