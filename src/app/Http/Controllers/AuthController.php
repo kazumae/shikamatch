@@ -50,4 +50,45 @@ class AuthController extends Controller
 
         return redirect('/login');
     }
+
+    /**
+     * 新規登録画面を表示
+     */
+    public function showRegisterForm()
+    {
+        return Inertia::render('Auth/Register');
+    }
+
+    /**
+     * 新規登録処理
+     * （モック実装: 実際にはUser::create()等を使用）
+     */
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // 実際の実装では以下を実行
+        // $user = User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'password' => Hash::make($request->password),
+        // ]);
+        // Auth::login($user);
+        // $request->session()->regenerate();
+
+        // モック実装: メール認証画面へ遷移
+        return redirect('/verify-email');
+    }
+
+    /**
+     * メール認証画面を表示
+     */
+    public function showVerifyEmail()
+    {
+        return Inertia::render('Auth/VerifyEmail');
+    }
 }
