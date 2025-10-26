@@ -30,10 +30,10 @@ services:
     container_name: laravel-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_PASSWORD: password
-      MYSQL_USER: laravel
+      MYSQL_DATABASE: shikamatch_production
+      MYSQL_ROOT_PASSWORD: nlo+I66t+/DmFryzSpmziv7fDc/i4Z/ZrM5QIrRHFyg=
+      MYSQL_PASSWORD: AUkfDl7Nlgh5zJcJoUKfqCeevEiM1Rc9
+      MYSQL_USER: shikamatch_user
     volumes:
       - dbdata:/var/lib/mysql
     ports:
