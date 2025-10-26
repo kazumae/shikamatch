@@ -228,6 +228,16 @@
                 <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">こんな人とバンド組みたい</h3>
                 <p class="text-sm lg:text-base text-gray-600 whitespace-pre-wrap">{{ user.band_preference }}</p>
               </div>
+
+              <!-- ログアウトボタン -->
+              <div class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
+                <button
+                  @click="logout"
+                  class="w-full px-4 py-3 lg:px-6 lg:py-3 bg-gray-100 text-gray-700 rounded-lg font-medium hover:bg-gray-200 transition"
+                >
+                  ログアウト
+                </button>
+              </div>
             </div>
           </div>
         </main>
@@ -255,7 +265,7 @@
 </template>
 
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 
 // Props
 const props = defineProps({
@@ -285,5 +295,14 @@ const getSongsData = () => {
     return props.user.songs_to_copy
   }
   return []
+}
+
+// Logout function
+const logout = () => {
+  router.post('/logout', {}, {
+    onSuccess: () => {
+      router.visit('/login')
+    }
+  })
 }
 </script>
