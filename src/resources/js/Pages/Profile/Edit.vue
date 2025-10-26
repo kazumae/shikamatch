@@ -222,28 +222,53 @@
               <!-- コピーしたい曲 -->
               <div class="bg-white px-4 py-4 lg:px-8 lg:py-6 border-b border-gray-200 lg:shadow-sm">
                 <label class="block text-sm lg:text-base font-medium text-gray-700 mb-2 lg:mb-3">コピーしたい曲</label>
-                <div class="space-y-2 lg:space-y-3">
-                  <div v-for="(song, index) in form.songs_to_copy" :key="index" class="flex gap-2 lg:gap-3">
-                    <input
-                      v-model="form.songs_to_copy[index]"
-                      type="text"
-                      placeholder="例：小さな恋のうた"
-                      class="flex-1 px-4 py-2 lg:px-5 lg:py-3 border border-gray-300 rounded-lg text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    <button
-                      @click.prevent="removeSongToCopy(index)"
-                      class="px-3 py-2 lg:px-4 lg:py-3 text-red-600 hover:bg-red-50 rounded-lg transition"
-                    >
-                      <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
+                <div class="space-y-3 lg:space-y-4">
+                  <div v-for="(song, index) in form.songs_to_copy" :key="index" class="bg-gray-50 p-3 lg:p-4 rounded-lg border border-gray-200">
+                    <div class="space-y-3 lg:space-y-3">
+                      <div>
+                        <label class="block text-xs lg:text-sm font-medium text-gray-600 mb-1">曲名</label>
+                        <input
+                          v-model="form.songs_to_copy[index].title"
+                          type="text"
+                          placeholder="例：小さな恋のうた"
+                          class="w-full px-3 py-1.5 lg:px-4 lg:py-2 border border-gray-300 rounded-md text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
+                      <div>
+                        <label class="block text-xs lg:text-sm font-medium text-gray-600 mb-1">アーティスト名</label>
+                        <input
+                          v-model="form.songs_to_copy[index].artist"
+                          type="text"
+                          placeholder="例：MONGOL800"
+                          class="w-full px-3 py-1.5 lg:px-4 lg:py-2 border border-gray-300 rounded-md text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
+                      <div>
+                        <label class="block text-xs lg:text-sm font-medium text-gray-600 mb-1">YouTube URL（任意）</label>
+                        <input
+                          v-model="form.songs_to_copy[index].youtube_url"
+                          type="url"
+                          placeholder="https://www.youtube.com/watch?v=..."
+                          class="w-full px-3 py-1.5 lg:px-4 lg:py-2 border border-gray-300 rounded-md text-sm lg:text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </div>
+                      <div class="flex justify-end">
+                        <button
+                          v-if="form.songs_to_copy.length > 1"
+                          @click.prevent="removeSongToCopy(index)"
+                          type="button"
+                          class="px-3 py-1 lg:px-4 lg:py-2 bg-red-100 text-red-700 rounded-md text-sm lg:text-base hover:bg-red-200 transition"
+                        >
+                          削除
+                        </button>
+                      </div>
+                    </div>
                   </div>
                   <button
                     @click.prevent="addSongToCopy"
                     class="text-blue-600 text-sm lg:text-base font-medium hover:text-blue-700"
                   >
-                    + 追加
+                    + 曲を追加
                   </button>
                 </div>
               </div>
@@ -344,7 +369,7 @@ const form = reactive({
   sub_parts: props.user.sub_parts || [],
   genres: props.user.genres || [],
   music_preferences: props.user.music_preferences || [''],
-  songs_to_copy: props.user.songs_to_copy || [''],
+  songs_to_copy: props.user.songs_to_copy || [{ title: '', artist: '', youtube_url: '' }],
   favorite_artists: props.user.favorite_artists || [''],
   self_introduction: props.user.self_introduction || '',
   band_preference: props.user.band_preference || '',
@@ -442,7 +467,7 @@ const removeMusicPreference = (index) => {
 }
 
 const addSongToCopy = () => {
-  form.songs_to_copy.push('')
+  form.songs_to_copy.push({ title: '', artist: '', youtube_url: '' })
 }
 
 const removeSongToCopy = (index) => {
@@ -464,7 +489,7 @@ const removeFavoriteArtist = (index) => {
 const saveProfile = () => {
   // 空の要素を除去
   form.music_preferences = form.music_preferences.filter(item => item.trim() !== '')
-  form.songs_to_copy = form.songs_to_copy.filter(item => item.trim() !== '')
+  form.songs_to_copy = form.songs_to_copy.filter(item => item.title && item.title.trim() !== '')
   form.favorite_artists = form.favorite_artists.filter(item => item.trim() !== '')
 
   // プロフィール保存処理（今はログに出力）

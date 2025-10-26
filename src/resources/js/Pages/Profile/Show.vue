@@ -171,14 +171,35 @@
               <!-- コピーしたい曲 -->
               <div v-if="user.songs_to_copy && user.songs_to_copy.length > 0" class="px-4 py-4 lg:px-8 lg:py-6 border-t border-gray-200">
                 <h3 class="text-sm lg:text-base font-medium text-gray-900 mb-3 lg:mb-4">コピーしたい曲</h3>
-                <div class="flex flex-wrap gap-2 lg:gap-3">
-                  <span
-                    v-for="song in user.songs_to_copy"
-                    :key="song"
-                    class="px-3 py-1 lg:px-4 lg:py-2 text-sm lg:text-base rounded-full border border-gray-300 text-gray-600"
+                <div class="grid gap-3 lg:gap-4 sm:grid-cols-2">
+                  <div
+                    v-for="(song, index) in getSongsData()"
+                    :key="index"
+                    class="bg-gray-50 p-3 lg:p-4 rounded-lg border border-gray-200 hover:shadow-sm transition"
                   >
-                    {{ song }}
-                  </span>
+                    <div class="flex items-start justify-between">
+                      <div class="flex-1">
+                        <h4 class="text-sm lg:text-base font-medium text-gray-900">
+                          {{ typeof song === 'object' ? song.title : song }}
+                        </h4>
+                        <p v-if="typeof song === 'object' && song.artist" class="text-xs lg:text-sm text-gray-600 mt-1">
+                          {{ song.artist }}
+                        </p>
+                      </div>
+                      <a
+                        v-if="typeof song === 'object' && song.youtube_url"
+                        :href="song.youtube_url"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="ml-3 text-red-600 hover:text-red-700 transition flex items-center"
+                        title="YouTubeで見る"
+                      >
+                        <svg class="w-6 h-6 lg:w-7 lg:h-7" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -254,6 +275,14 @@ const getFavoriteArtists = () => {
     if (Array.isArray(props.user.favorite_artists)) {
       return props.user.favorite_artists
     }
+  }
+  return []
+}
+
+// Methods for handling songs data (backward compatibility)
+const getSongsData = () => {
+  if (props.user.songs_to_copy && Array.isArray(props.user.songs_to_copy)) {
+    return props.user.songs_to_copy
   }
   return []
 }

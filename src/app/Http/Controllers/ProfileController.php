@@ -73,7 +73,23 @@ class ProfileController extends Controller
             'sub_parts' => ['ベース', 'キーボード'],
             'genres' => ['ロック', 'ポップス'],
             'music_preferences' => ['メロディアス', 'グルーヴィー'],
-            'songs_to_copy' => ['小さな恋のうた', 'チェリー', '天体観測'],
+            'songs_to_copy' => [
+                [
+                    'title' => '小さな恋のうた',
+                    'artist' => 'MONGOL800',
+                    'youtube_url' => 'https://www.youtube.com/watch?v=example1',
+                ],
+                [
+                    'title' => 'チェリー',
+                    'artist' => 'スピッツ',
+                    'youtube_url' => 'https://www.youtube.com/watch?v=example2',
+                ],
+                [
+                    'title' => '天体観測',
+                    'artist' => 'BUMP OF CHICKEN',
+                    'youtube_url' => 'https://www.youtube.com/watch?v=example3',
+                ],
+            ],
             'favorite_artists' => ['BUMP OF CHICKEN', 'スピッツ'],
             'self_introduction' => 'ギター歴5年です。主にロックやポップスを演奏しています。週末を中心に活動しています。',
             'band_preference' => '音楽を楽しめる人と一緒にバンドを組みたいです！初心者の方も大歓迎です。',
